@@ -19,6 +19,10 @@ class Person < Nameable
     value
   end
 
+  def correct_name
+    @name
+  end
+
   private
 
   def of_age?
@@ -27,7 +31,5 @@ class Person < Nameable
     value
   end
 
-  def correct_name
-    @name
-  end
+ 
 end
