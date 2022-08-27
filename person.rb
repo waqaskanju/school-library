@@ -1,22 +1,20 @@
 require './nameable'
-require './decorator'
-
+require './capitalize_decorator'
+require './trimmer_decorator'
 class Person < Nameable
-  attr_accessor :name, :age
   attr_reader :id
+  attr_accessor :name, :age
 
-  def initialize(age, name = 'Unknown', parent_permission: true)
+  def initialize(age, name = 'Unknown', parent_permission = 'true')
     super()
-    @id = Random.rand(1..1000)
+    @id = Random.rand(100..5000)
     @name = name
     @age = age
     @parent_permission = parent_permission
   end
 
   def can_use_services?
-    value = false
-    value = true if of_age? || @parent_permission
-    value
+    of_age? || @parent_permission
   end
 
   def correct_name
@@ -26,8 +24,13 @@ class Person < Nameable
   private
 
   def of_age?
-    value = false
-    value = true if @age >= 18
-    value
+    @age >= 18
   end
 end
+
+person = Person.new(25, 'waqasahmadkanjuswat')
+p person.correct_name
+capitalized_person = CapitalizeDecorator.new(person)
+p capitalized_person.correct_name
+capitalized_trimmed_person = TrimmerDecorator.new(capitalized_person)
+p capitalized_trimmed_person.correct_name
