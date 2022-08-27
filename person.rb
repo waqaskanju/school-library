@@ -30,6 +30,4 @@ class Person < Nameable
     value = true if @age >= 18
     value
   end
-
- 
 end
